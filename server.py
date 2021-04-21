@@ -240,7 +240,6 @@ def profile_edit(id):
         user.email = form.email.data
         user.about = form.about.data
         db_sess.commit()
-        print('dkd')
         return redirect('/profile/' + str(id))
 
     form.email.data = user.email
