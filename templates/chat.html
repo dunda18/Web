@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <div style="border:solid thick darkblue; border-radius: 0em;
+          border-width:3px; padding-left:9px; padding-top:6px;
+          padding-bottom:6px; margin:2px; width:1110px; height:790px; overflow: scroll">
+        {{ chat_title }}
+        {% for message in chat.messages %}
+            <div style="word-wrap: break-word; border-radius: 1em;" class="alert alert-warning" role="alert">
+                <p> <a href="/profile/{{message.user.id}}"> {{ message.user.login }} </a> </p>
+                {{ message.text }}
+            </div>
+        {% endfor %}
+    </div>
+    <p> {{ form.message(class="form-control") }} {{ form.submit(type="submit", class="btn btn-primary") }}
+        <a href="/add_user_to_chat/{{chat.id}}" class="btn btn-success">Добавить пользователя</a>
+        <a href="/" class="btn btn-secondary">Чаты</a></p>
+    {% for error in form.message.errors %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endfor %}
+</form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Профиль пользователя {{user.login}}</h1>
+    <p>
+        <div class="alert alert-primary" role="alert">
+            Почта: {{user.email}}
+        </div>
+        <div style="word-wrap: break-word;" class="alert alert-success" role="alert">
+            Немного о себе: {{user.about}}
+        </div>
+    </p>
+    {% if current_user.id == user.id %}
+        <a href="/profile_edit/{{user.id}}" class="btn btn-primary">Редактировать</a>
+    {% endif %}
+    <a href="/" class="btn btn-secondary">Чаты</a>
+{% endblock %}

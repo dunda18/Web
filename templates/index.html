@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Чаты</h1>
+<a href="/create_chat" class="btn btn-secondary">Новый чат</a> </br> </br>
+<div style="border:solid thick black; border-radius: 0em;
+          border-width:3px; padding-left:9px; padding-top:6px;
+          padding-bottom:6px; margin:2px; width:1110px; height:760px; overflow: scroll">
+    {% for item in chats%}
+    <div style="border:solid thick blue; border-radius: 1em;
+          border-width:3px; padding-left:9px; padding-top:6px;
+          padding-bottom:6px; margin:2px;">
+        <h5> {{item.title}} </h5> <br>
+        <a href="/chats/{{ item.id }}" class="btn btn-success"> Перейти </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
