@@ -162,6 +162,10 @@ def chat(id):
 
     form = ChatForm()
     chat = db_sess.query(Chat).filter(Chat.id == id).first()
+
+    if not chat:
+        return render_template("chat_not_found.html", title='Чат не найден')
+
     user = db_sess.query(User).filter(User.id == current_user.id).first()
 
     if not db_sess.query(User_Chat).filter((User_Chat.user_id == user.id) & (User_Chat.chat_id == chat.id)).first():
@@ -177,6 +181,7 @@ def chat(id):
         # current_user.messages.append(message)
         db_sess.add(message)
         db_sess.commit()
+        form.message.data = ''
 
     return render_template("chat.html", title='Чат', form=form, chat_title=chat.title, chat=chat)
 
